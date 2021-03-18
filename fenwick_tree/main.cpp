@@ -16,6 +16,7 @@ public:
     }
 
     void add(long long index, long long value) {
+        if(index <= 0) return;
         while(index <= _limit) {
             _tree[index] += value;
             index += index & -index;
@@ -23,9 +24,8 @@ public:
     }
 
     long long read(int index) {
-        ++index;
         long long sum = 0;
-        while(index) {
+        while(index > 0) {
             sum += _tree[index];
             index -= index & -index;
         }
@@ -38,7 +38,6 @@ public:
     }
 
     long long elementAt(int index) {
-        if(index == 0) read(index);
         return read(index) - read(index - 1);
     }
 };
